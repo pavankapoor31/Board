@@ -1,0 +1,19 @@
+.coloredcard {
+    width: 100%;
+    max-width: 221px;
+    padding: 1rem;
+    border-radius: 15px;
+    position: relative;
+
+    &__icon {
+        display: flex;
+        justify-content: right;
+    }
+
+    &__details {
+        &__value {
+            font-weight: bold;
+            font-size: 24px;
+        }
+    }
+}
