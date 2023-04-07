@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {ReactComponent as RightCaret} from './../../assets/images/right-caret.svg'
 const Schedule = () => {
     const schedules = [
         {
@@ -19,9 +19,20 @@ const Schedule = () => {
     ]
     return (
         <div className="bottom_card">
-            <div className="schedule__title">Todays Schedule</div>
+            <div className="schedule__title--flex">
+                <div className="card__title card__title--flex">
+                    <div className="card__title__left">
+                        Top products
+                    </div>
+                    <div className="linegraph__daterange card__title__right">
+                        <span className='text-light-schedule' id="schedule" style={{ border: '0',}}>
+                            View all <span className='pl-2'> <RightCaret/> </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
             {schedules.map(
-                (item,index) => {
+                (item, index) => {
                     return <div className="schedule-card" key={index}>
                         <div className="colorline" style={{ backgroundColor: item.color }}></div>
                         <div className='schedule-card__container'>

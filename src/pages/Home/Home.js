@@ -1,9 +1,8 @@
 import React from 'react'
 import './Home.scss'
-import Sidebar from '../../components/Sidebar/Sidebar'
-import Dashboard from '../Dashboard/Dashboard'
 import Login from '../Login/Login'
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, useNavigate } from 'react-router-dom';
+import DashboardContainer from '../Dashboard/DashboardContainer'
 const Home = () => {
     return (
         <div className="home">
@@ -11,8 +10,7 @@ const Home = () => {
                 <Routes>
                     <Route path='/login' element={<Login />} />
                     <Route path='/' element={<Login />} />
-                    <Route path='/dashboard' element={<><div className='home__dashboard'> <Sidebar /> </div>
-                        <div className="home__content"> <Dashboard /> </div></>} />
+                    <Route path='/dashboard' element={<DashboardContainer/>} />
                 </Routes>
             </BrowserRouter>
         </div>

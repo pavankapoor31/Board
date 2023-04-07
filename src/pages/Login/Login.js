@@ -4,12 +4,25 @@ import { ReactComponent as AppleLogo } from './../../assets/images/apple.svg'
 import { ReactComponent as GoogleLogo } from './../../assets/images/google.svg'
 import { useNavigate } from 'react-router-dom'
 const Login = () => {
+    const [passwordValue, setPasswordValue] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const navigate = useNavigate();
-    const handleSignIn = () => {
-        navigate('/dashboard')
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        const values = new FormData(e.target)
+        const loginData = [];
+        for (var pair of values.entries()) {
+            loginData.push(pair[1]);
+        }
+        const emailVal = loginData[0];
+        const passwordVal = loginData[1];
+        if (passwordVal.length > 5) {
+            localStorage.setItem('access_token','123456');
+            setPasswordError('*Minimum 6 digit password required');
+            navigate('/dashboard')
+        }
+        else setPasswordError('*Minimum 6 digit password required');
     }
-    const [email, setEmail] = useState('example@example.com')
-    const [password, setPassword] = useState('')
     return (
         <div className='login'>
             <div className="sideLogo__container">
@@ -27,22 +40,25 @@ const Login = () => {
                     <div className="login__accounts__apple"><AppleLogo /> <span className="login__accounts__apple__text"> Sign in with Apple</span> </div>
                 </div>
                 <div className="login__form__container">
-                    <div className="login__form">
-                        <div className="container">
-                            <label htmlFor="loginemail">Email address</label>
-                            <input type="email" name="loginemail" id="loginemail" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                    <form action="" onSubmit={handleSignIn}>
+                        <div className="login__form">
+                            <div className="container">
+                                <label htmlFor="loginemail">Email address</label>
+                                <input type="email" name="loginemail" id="loginemail" defaultValue='Johndoe@gmail.com' />
+                            </div>
+                            <div className="container">
+                                <label htmlFor="loginpass">Password</label>
+                                <input type="password" name="loginpass" id="loginpass" onChange={(e) => { e.target.value.length > 6 && setPasswordError('') }} />
+                                <div className="password-error"> {passwordError} </div>
+                            </div>
+                            <div className="login__form__forgotpass">
+                                Forgot password?
+                            </div>
+                            <button className="login__form__submit" typeof='submit' >
+                                Sign in
+                            </button>
                         </div>
-                        <div className="container">
-                            <label htmlFor="loginpass">Password</label>
-                            <input type="email" name="loginpass" id="loginpass" />
-                        </div>
-                        <div className="login__form__forgotpass">
-                            Forgot password?
-                        </div>
-                        <div className="login__form__submit" onClick={handleSignIn}>
-                            Sign in
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div className="register">
                     <span className='text-blue'>
