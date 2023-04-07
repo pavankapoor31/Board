@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Installation Steps
 
 To run the project, download this repository and cd to root directory and run `npm install` and then `npm start`.
 
